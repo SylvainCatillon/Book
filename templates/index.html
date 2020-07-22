@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <style type="text/css">
+      body {
+        background-color: #F6D54A;
+      }
+
+      .project_caption {
+        position: absolute;
+        top: 0;
+        left: 0;
+        text-shadow: 1px 1px grey;
+        opacity: 0;
+        background: #FFFFFF;
+      }
+
+      .project_caption:hover {
+        opacity: 1;
+      }
+    </style>
+
+    <title>Sylvain Catillon</title>
+  </head>
+  <body>
+  <div class="container">
+    <section class="row bg-info text-center justify-content-center">
+      <div class="col-6">
+        <img class="rounded-lg m-1" src="{{url_for('static', filename='img/profil.jpg')}}">
+      </div>
+      <div class="col-6 m-auto">
+        <h2>Sylvain Catillon</h2>
+        <h4>Développeur Python - Django</h4>
+        <br>
+        <h4><a class="text-dark" href="mailto:sylvain.catillon@gmail.com">sylvain.catillon@gmail.com</a></h4>
+        <h4><a class="text-dark" href="https://www.linkedin.com/in/sylvain-catillon" target="_blank">linkedin.com/in/sylvain-catillon</a></h4>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="text-center">Mes réalisations</h2>
+      {% for project in projects %}
+      <div id="{{project.tag}}_content" class="project_content" style="display: none">
+        {% include 'projects/'+project.tag+'.html' %}
+      </div>
+      {% endfor %}
+
+      <div class="row">
+        {% for project in projects %}
+        {% if loop.index%4==1 %}
+          <ul class="list-group list-group-horizontal">
+        {% endif %}
+        <div class="col-3 my-2">
+        <li class="mx-auto project_button list-group-item list-group-item-action rounded-lg" data-project="{{project.tag}}" style="cursor: pointer">
+        <img class="project_img img-fluid" src="{{project.img}}"
+        alt="image du projet">
+        <div class="project_caption h-100 w-100">
+          <h3>{{project.title}}</h3>
+          <h5>{{project.subtitle}}</h5>
+        </div>
+        </li>
+      </div>
+        {% if loop.index%4==0 %}
+          </ul>
+        {% endif %}
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="mt-2 bg-success">
+      <div class="row text-center">
+        <div class="col">
+          <h4>Compétences techniques</h4>
+          <div class="row">
+          <ul class="col">
+            <li>Python</li>
+            <li>Html 5</li>
+            <li>Css 3</li>
+            <li>SQL</li>
+            <li>Javascript</li>
+          </ul>
+          <ul class="col">
+            <li>Django</li>
+            <li>Flask</li>
+            <li>Bootstrap</li>
+            <li>JQuery</li>
+          </ul>
+          <ul class="col">
+            <li>Git</li>
+            <li>Heroku</li>
+            <li>PostgreSQL</li>
+            <li>MySQL</li>
+          </ul>
+          </div>
+        </div>
+        <div class="col">
+          <h4>Compétences professionelles</h4>
+          <ul>
+            <li>Anglais technique / Anglais C1</li>
+            <li>Écriture de tests unitaires et fonctionnels</li>
+            <li>Gestion de projet Agile / Réalisation de tableau Scrum</li>
+            <li>Mise en production d'applications</li>
+            <li>Rédaction de spécifications fonctionnelles et techniques</li>
+            <li>Analyse des besoins utilisateurs</li>
+            <li>Veille technologique</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h4>Soft skills</h4>
+          <ul>
+            <li>Conscience professionnelle</li>
+            <li>Sérieux</li>
+            <li>Curiosité</li>
+            <li>Envie d'apprendre</li>
+            <li>Capacité d'analyse</li>
+            <li>Esprit d'équipe</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="text-center bg-primary">
+      <h3>A propos de moi</h3>
+      <p>Passionné par la programmation, notamment en Python, j’ai commencé par me former en autodidacte. J’ai ensuite suivi une formation de développeur d’applications web chez OpenClassrooms pour valider et compléter mes compétences.<br>
+      Motivé, sérieux et appliqué, je suis formé à Python et ses frameworks Django et Flask, ainsi qu’à HTML, Git, Bootstrap, UML, et à la méthodologie de projets Agile. J’ai aussi des bases de Css, Javascript, JQuery et SQL.
+      </p>
+    </section>
+  </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+      $(function() {
+
+        $(".project_button").on("click", function() {
+          let $this = $(this),
+              project = $this.data("project"),
+              active = $this.hasClass("active")
+          $(".project_button").removeClass("active")
+          $(".project_content").hide()
+          if (!active) {
+              $this.addClass("active")
+              $("#"+project+"_content").fadeIn("slow")
+          }
+
+        })
+
+      })
+    </script>
+  </body>
+</html>
