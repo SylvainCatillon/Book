@@ -24,6 +24,11 @@
       .project_caption:hover {
         opacity: 1;
       }
+
+      .project_content {
+        display: none;
+        background-color: white;
+      }
     </style>
 
     <title>Sylvain Catillon</title>
@@ -46,7 +51,7 @@
     <section>
       <h2 class="text-center">Mes réalisations</h2>
       {% for project in projects %}
-      <div id="{{project.tag}}_content" class="project_content" style="display: none">
+      <div id="{{project.tag}}_content" class="project_content rounded-lg p-2">
         {% include 'projects/'+project.tag+'.html' %}
       </div>
       {% endfor %}
