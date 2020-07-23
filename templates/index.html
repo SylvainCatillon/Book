@@ -9,7 +9,11 @@
 
     <style type="text/css">
       body {
-        background-color: #F6D54A;
+        background-color: #14b1ab;
+      }
+
+      li {
+        list-style: none;
       }
 
       .project_caption {
@@ -19,9 +23,10 @@
         text-shadow: 1px 1px grey;
         opacity: 0;
         background: #FFFFFF;
+        cursor: pointer;
       }
 
-      .project_caption:hover {
+      .project_caption:hover, .project_caption.active {
         opacity: 1;
       }
 
@@ -29,15 +34,28 @@
         display: none;
         background-color: white;
       }
+
+      #profil_img {
+        height: 250px;
+      }
+
+      #skills_section {
+        background-color: #f9d56e;
+      }
+
+      #about_section {
+        background-color: #f3ecc2;
+      }
+
     </style>
 
     <title>Sylvain Catillon</title>
   </head>
   <body>
   <div class="container">
-    <section class="row bg-info text-center justify-content-center">
+    <section class="row text-center justify-content-center">
       <div class="col-6">
-        <img class="rounded-lg m-1" src="{{url_for('static', filename='img/profil.jpg')}}">
+        <img id="profil_img" class="rounded-lg m-1" src="{{url_for('static', filename='img/profil.jpg')}}">
       </div>
       <div class="col-6 m-auto">
         <h2>Sylvain Catillon</h2>
@@ -58,27 +76,24 @@
 
       <div class="row">
         {% for project in projects %}
-        {% if loop.index%4==1 %}
-          <ul class="list-group list-group-horizontal">
-        {% endif %}
         <div class="col-3 my-2">
-        <li class="mx-auto project_button list-group-item list-group-item-action rounded-lg" data-project="{{project.tag}}" style="cursor: pointer">
-        <img class="project_img img-fluid" src="{{project.img}}"
-        alt="image du projet">
-        <div class="project_caption h-100 w-100">
-          <h3>{{project.title}}</h3>
-          <h5>{{project.subtitle}}</h5>
+          <div class="mx-auto project_button rounded-lg" data-project="{{project.tag}}">
+          <img class="project_img img-fluid" src="{{project.img}}"
+          alt="image du projet">
+          <div class="project_caption text-center h-100 w-100">
+            <h3>{{project.title}}</h3>
+            <h5>{{project.subtitle}}</h5>
+          </div>
+          </div>
         </div>
-        </li>
-      </div>
-        {% if loop.index%4==0 %}
-          </ul>
-        {% endif %}
         {% endfor %}
       </div>
     </section>
+  </div>
 
-    <section class="mt-2 bg-success">
+  <div class="container-fluid">
+
+    <section id="skills_section" class="mt-2 mt-2 rounded">
       <div class="row text-center">
         <div class="col">
           <h4>Compétences techniques</h4>
@@ -130,9 +145,10 @@
       </div>
     </section>
 
-    <section class="text-center bg-primary">
+    <section id="about_section" class="text-center mt-2 rounded">
       <h3>A propos de moi</h3>
-      <p>Passionné par la programmation, notamment en Python, j’ai commencé par me former en autodidacte. J’ai ensuite suivi une formation de développeur d’applications web chez OpenClassrooms pour valider et compléter mes compétences.<br>
+      <p>Passionné par la programmation, notamment en Python, j’ai commencé par me former en autodidacte. <br>
+        J’ai ensuite suivi une formation de développeur d’applications web chez OpenClassrooms pour valider et compléter mes compétences.<br>
       Motivé, sérieux et appliqué, je suis formé à Python et ses frameworks Django et Flask, ainsi qu’à HTML, Git, Bootstrap, UML, et à la méthodologie de projets Agile. J’ai aussi des bases de Css, Javascript, JQuery et SQL.
       </p>
     </section>
@@ -150,11 +166,11 @@
         $(".project_button").on("click", function() {
           let $this = $(this),
               project = $this.data("project"),
-              active = $this.hasClass("active")
-          $(".project_button").removeClass("active")
+              active = $this.find(".project_caption").hasClass("active")
+          $(".project_button").find(".project_caption").removeClass("active")
           $(".project_content").hide()
           if (!active) {
-              $this.addClass("active")
+              $this.find(".project_caption").addClass("active")
               $("#"+project+"_content").fadeIn("slow")
           }
 
