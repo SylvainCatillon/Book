@@ -10,7 +10,7 @@ def index():
         "subtitle": "Application Django - Projet libre",
         "tag": "planniteam",
         "btn_img": url_for('static', filename='img/PlanniTeam.jpg'),
-        "content_img": url_for('static', filename='img/planniteam.jpg')
+        "content_img": url_for('static', filename='img/PlanniTeam.jpg')
         },
         {
         "title": "Pur Beurre",
