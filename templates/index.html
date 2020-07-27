@@ -10,6 +10,8 @@
     <style type="text/css">
       body {
         background-color: #14b1ab;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 1.1em;
       }
 
       li {
@@ -54,10 +56,10 @@
   <body>
   <div class="container">
     <section class="row text-center justify-content-center">
-      <div class="col-6">
+      <div class="col-12 col-md-6">
         <img id="profil_img" class="rounded-lg m-1" src="{{url_for('static', filename='img/profil.jpg')}}">
       </div>
-      <div class="col-6 m-auto">
+      <div class="col-12 col-md-6 m-auto">
         <h2>Sylvain Catillon</h2>
         <h4>Développeur Python - Django</h4>
         <br>
@@ -65,22 +67,33 @@
         <h4><a class="text-dark" href="https://www.linkedin.com/in/sylvain-catillon" target="_blank">linkedin.com/in/sylvain-catillon</a></h4>
       </div>
     </section>
+  </div>
+
+  <div class="container-fluid px-md-5">
 
     <section>
       <h2 class="text-center">Mes réalisations</h2>
       {% for project in projects %}
-      <div id="{{project.tag}}_content" class="project_content rounded-lg p-2">
-        {% include 'projects/'+project.tag+'.html' %}
+      <div id="{{project.tag}}_content" class="project_content rounded-lg p-2 mx-lg-5">
+        <div class="row">
+          <img class="col-lg-5" src="{{project.content_img}}">
+          <div class="col-lg-6 offset-lg-1">
+            <h3>{{project.title}}</h3>
+            <h5>{{project.subtitle}}</h5>
+            <hr>
+            <p>{% include 'projects/'+project.tag+'.html' %}</p>
+        </div>
+        </div>
       </div>
       {% endfor %}
 
       <div class="row">
         {% for project in projects %}
-        <div class="col-3 my-2">
+        <div class="col-6 col-md-4 col-lg-3 my-2">
           <div class="mx-auto project_button rounded-lg" data-project="{{project.tag}}">
-          <img class="project_img img-fluid" src="{{project.img}}"
+          <img class="project_img img-fluid" src="{{project.btn_img}}"
           alt="image du projet">
-          <div class="project_caption text-center h-100 w-100">
+          <div class="project_caption d-none d-md-flex flex-column justify-content-center text-center h-100 w-100">
             <h3>{{project.title}}</h3>
             <h5>{{project.subtitle}}</h5>
           </div>
@@ -89,14 +102,10 @@
         {% endfor %}
       </div>
     </section>
-  </div>
 
-  <div class="container-fluid">
-
-    <section id="skills_section" class="mt-2 mt-2 rounded">
-      <div class="row text-center">
+    <section id="skills_section" class="row mx-auto mt-2 p-2 rounded">
         <div class="col">
-          <h4>Compétences techniques</h4>
+          <h4 class="text-center">Compétences techniques</h4>
           <div class="row">
           <ul class="col">
             <li>Python</li>
@@ -120,11 +129,11 @@
           </div>
         </div>
         <div class="col">
-          <h4>Compétences professionelles</h4>
+          <h4 class="text-center">Compétences professionelles</h4>
           <ul>
             <li>Anglais technique / Anglais C1</li>
             <li>Écriture de tests unitaires et fonctionnels</li>
-            <li>Gestion de projet Agile / Réalisation de tableau Scrum</li>
+            <li>Méthode Agile / Réalisation de tableau Scrum</li>
             <li>Mise en production d'applications</li>
             <li>Rédaction de spécifications fonctionnelles et techniques</li>
             <li>Analyse des besoins utilisateurs</li>
@@ -132,7 +141,7 @@
           </ul>
         </div>
         <div class="col">
-          <h4>Soft skills</h4>
+          <h4 class="text-center">Soft skills</h4>
           <ul>
             <li>Conscience professionnelle</li>
             <li>Sérieux</li>
@@ -142,15 +151,21 @@
             <li>Esprit d'équipe</li>
           </ul>
         </div>
-      </div>
     </section>
 
-    <section id="about_section" class="text-center mt-2 rounded">
-      <h3>A propos de moi</h3>
-      <p>Passionné par la programmation, notamment en Python, j’ai commencé par me former en autodidacte. <br>
+    <section id="about_section" class="row mx-auto mt-2 p-2 rounded">
+    <div class="col-12 col-md-6">
+      <h3 class="text-center">A propos de moi</h3>
+      <p class="px-md-5">Passionné par la programmation, notamment en Python, j’ai commencé par me former en autodidacte.
         J’ai ensuite suivi une formation de développeur d’applications web chez OpenClassrooms pour valider et compléter mes compétences.<br>
       Motivé, sérieux et appliqué, je suis formé à Python et ses frameworks Django et Flask, ainsi qu’à HTML, Git, Bootstrap, UML, et à la méthodologie de projets Agile. J’ai aussi des bases de Css, Javascript, JQuery et SQL.
       </p>
+    </div>
+    <div class="col-12 col-md-6">
+      <h3 class="text-center">Mes loisirs</h3>
+      <p class="px-md-5">En dehors de la programmation, j'ai aussi une passion pour les danses Swing, <a href="https://www.youtube.com/watch?v=ahoJReiCaPk" target="_blank">un ensemble de danses des années 1930</a>. En plus de pratiquer ces danses, j'anime des cours et je fais partie d'une troupe chorégraphique.<br>J'aime aussi le Rubik's cube, et l'univers fantastique (je lis actuellement en anglais le 5ème tome de <a href="https://en.wikipedia.org/wiki/A_Song_of_Ice_and_Fire" target="_blank">"A song of ice and fire"</a>, les livres à l'origine de la série Game of Thrones).
+      </p>
+    </div>
     </section>
   </div>
 
@@ -165,13 +180,16 @@
 
         $(".project_button").on("click", function() {
           let $this = $(this),
-              project = $this.data("project"),
+              $project = $("#"+$this.data("project")+"_content"),
               active = $this.find(".project_caption").hasClass("active")
           $(".project_button").find(".project_caption").removeClass("active")
           $(".project_content").hide()
           if (!active) {
               $this.find(".project_caption").addClass("active")
-              $("#"+project+"_content").fadeIn("slow")
+              $project.fadeIn("slow")
+              if ($project.offset().top < $(window).scrollTop()) {
+                $project[0].scrollIntoView({behavior: "smooth"})
+              }
           }
 
         })
