@@ -7,55 +7,14 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <style type="text/css">
-      body {
-        background-color: #14b1ab;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 1.1em;
-      }
-
-      li {
-        list-style: none;
-      }
-
-      .project_caption {
-        position: absolute;
-        top: 0;
-        left: 0;
-        text-shadow: 1px 1px grey;
-        opacity: 0;
-        background: #FFFFFF;
-        cursor: pointer;
-      }
-
-      .project_caption:hover, .project_caption.active {
-        opacity: 1;
-      }
-
-      .project_content {
-        display: none;
-        background-color: white;
-      }
-
-      #profil_img {
-        height: 250px;
-      }
-
-      #skills_section {
-        background-color: #f9d56e;
-      }
-
-      #about_section {
-        background-color: #f3ecc2;
-      }
-
-    </style>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css')}}">
 
     <title>Sylvain Catillon</title>
   </head>
   <body>
-  <div class="container">
-    <section class="row text-center justify-content-center">
+    <section id="profil_section">
+    <div class="container">
+      <div class="row text-center justify-content-center">
       <div class="col-12 col-md-6">
         <img id="profil_img" class="rounded-lg m-1" src="{{url_for('static', filename='img/profil.jpg')}}">
       </div>
@@ -63,15 +22,16 @@
         <h2>Sylvain Catillon</h2>
         <h4>Développeur Python - Django</h4>
         <br>
-        <h4><a class="text-dark" href="mailto:sylvain.catillon@gmail.com">sylvain.catillon@gmail.com</a></h4>
-        <h4><a class="text-dark" href="https://www.linkedin.com/in/sylvain-catillon" target="_blank">linkedin.com/in/sylvain-catillon</a></h4>
+        <h4><a href="mailto:sylvain.catillon@gmail.com">sylvain.catillon@gmail.com</a></h4>
+        <h4><a href="https://www.linkedin.com/in/sylvain-catillon" target="_blank">linkedin.com/in/sylvain-catillon</a></h4>
       </div>
-    </section>
+    </div>
   </div>
+    </section>
 
-  <div class="container-fluid px-md-5">
+  <div class="container-fluid">
 
-    <section>
+    <section class="mt-1 mt-md-2 mt-lg-3">
       <h2 class="text-center">Mes réalisations</h2>
       {% for project in projects %}
       <div id="{{project.tag}}_content" class="project_content rounded-lg p-2 mx-lg-5">
@@ -87,7 +47,7 @@
       </div>
       {% endfor %}
 
-      <div class="row">
+      <div class="row px-md-5">
         {% for project in projects %}
         <div class="col-6 col-md-4 col-lg-3 my-2">
           <div class="mx-auto project_button rounded-lg" data-project="{{project.tag}}">
@@ -103,8 +63,31 @@
       </div>
     </section>
 
-    <section id="skills_section" class="row mx-auto mt-2 p-2 rounded">
-        <div class="col">
+    <section id="skills_section" class="row py-3 px-md-5 mt-1 mt-md-2 mt-lg-3">
+        <div class="col-12 col-md-6 col-lg-4">
+          <h4 class="text-center">Compétences professionelles</h4>
+          <ul>
+            <li>Anglais technique / Anglais C1</li>
+            <li>Écriture de tests unitaires et fonctionnels</li>
+            <li>Méthode Agile / Réalisation de tableau Scrum</li>
+            <li>Mise en production d'applications</li>
+            <li>Rédaction de spécifications fonctionnelles et techniques</li>
+            <li>Analyse des besoins utilisateurs</li>
+            <li>Veille technologique</li>
+          </ul>
+        </div>
+        <div class="col-12 col-md-6 col-lg-4">
+          <h4 class="text-center">Soft skills</h4>
+          <ul>
+            <li>Conscience professionnelle</li>
+            <li>Sérieux</li>
+            <li>Curiosité</li>
+            <li>Envie d'apprendre</li>
+            <li>Capacité d'analyse</li>
+            <li>Esprit d'équipe</li>
+          </ul>
+        </div>
+        <div class="col-12 col-lg-4">
           <h4 class="text-center">Compétences techniques</h4>
           <div class="row">
           <ul class="col">
@@ -128,32 +111,9 @@
           </ul>
           </div>
         </div>
-        <div class="col">
-          <h4 class="text-center">Compétences professionelles</h4>
-          <ul>
-            <li>Anglais technique / Anglais C1</li>
-            <li>Écriture de tests unitaires et fonctionnels</li>
-            <li>Méthode Agile / Réalisation de tableau Scrum</li>
-            <li>Mise en production d'applications</li>
-            <li>Rédaction de spécifications fonctionnelles et techniques</li>
-            <li>Analyse des besoins utilisateurs</li>
-            <li>Veille technologique</li>
-          </ul>
-        </div>
-        <div class="col">
-          <h4 class="text-center">Soft skills</h4>
-          <ul>
-            <li>Conscience professionnelle</li>
-            <li>Sérieux</li>
-            <li>Curiosité</li>
-            <li>Envie d'apprendre</li>
-            <li>Capacité d'analyse</li>
-            <li>Esprit d'équipe</li>
-          </ul>
-        </div>
     </section>
 
-    <section id="about_section" class="row mx-auto mt-2 p-2 rounded">
+    <section id="about_section" class="row py-3 px-md-5 mt-1 mt-md-2 mt-lg-3">
     <div class="col-12 col-md-6">
       <h3 class="text-center">A propos de moi</h3>
       <p class="px-md-5">Passionné par la programmation, notamment en Python, j’ai commencé par me former en autodidacte.
